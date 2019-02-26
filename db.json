@@ -1,0 +1,18 @@
+{
+  "regular": [
+    {
+      "id": 1,
+	  "entrada": "ensalada",
+      "plato": "milanesas",
+	  "postre": "fruta"
+    }
+  ],
+  "celiaco": [
+    {
+      "id": 2,
+	  "entrada": "ensalada",
+      "plato": "milanesas",
+	  "postre": "fruta"
+    }
+  ]
+}

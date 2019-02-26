@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:src="@drawable/logo_comedor" />
+
+        <!--Entrada -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Entrada"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textSize="20dp"
+            android:id="@+id/entrada_titulo"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:layout_weight="0.1" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(sin datos)"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textSize="20dp"
+            android:id="@+id/entrada"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.1" />
+
+        <!--plato principal -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plato Principal"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textSize="20dp"
+            android:id="@+id/principal_titulo"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(sin datos)"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textSize="20dp"
+            android:id="@+id/principal"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.1" />
+
+        <!--postre -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postre"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textSize="20dp"
+            android:id="@+id/postre_titulo"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:text="(sin datos)"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textSize="20dp"
+            android:id="@+id/postre"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.1" />
+
+        <!--botones -->
+
+        <Button
+            android:id="@+id/botonVerMenuCeliacos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:onClick="mostrarMenuCeliacos"
+            android:text="Menú Celiaco" />
+    </LinearLayout>
+</FrameLayout>

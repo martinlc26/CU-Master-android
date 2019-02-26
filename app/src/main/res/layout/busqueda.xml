@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:weightSum="1"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_weight="0.15"
+        android:gravity="center_horizontal"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/negro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccione lo que desea buscar: "
+            android:id="@+id/tv1" />
+
+        <Spinner
+            android:scrollbarSize="30dp"
+            android:layout_weight="0.3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/busquedaSpinner" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.15"
+        android:gravity="center_horizontal"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/negro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccione el edificio: "
+            android:id="@+id/tv2" />
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/negro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccione la instalación: "
+            android:id="@+id/tv2b" />
+
+        <Spinner
+            android:scrollbarSize="30dp"
+            android:layout_weight="0.3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/busquedaSpinner2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.15"
+        android:gravity="center_horizontal"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/negro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccione el aula: "
+            android:id="@+id/tv3" />
+
+        <Spinner
+            android:scrollbarSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:id="@+id/busquedaSpinner3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buscar"
+                android:id="@+id/boton_busqueda" />
+
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_weight="0.45"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>
