@@ -13,7 +13,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
@@ -101,12 +101,12 @@
         <!--botones -->
 
         <Button
-            android:id="@+id/botonVerMenuCeliacos"
+            android:id="@+id/botonVerMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:onClick="mostrarMenuCeliacos"
+            android:onClick="mostrarMenuComedor"
             android:text="Menú Celiaco" />
     </LinearLayout>
 </FrameLayout>

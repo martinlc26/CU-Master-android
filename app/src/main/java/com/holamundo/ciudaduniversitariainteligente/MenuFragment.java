@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,14 +39,26 @@ public class MenuFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+    //textview para mostrar las partes del menu
+    private TextView t_entrada;
+    private TextView t_principal;
+    private TextView t_postre;
+    private Button botonActualizar;
+
+    //variables para guardar las partes del menu
+    private String entrada_n;
+    private String principal_n;
+    private String postre_n;
+    private String entrada_c;
+    private String principal_c;
+    private String postre_c;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
-    private JSONArray menu;
-    private JSONArray celiaco;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -60,12 +73,17 @@ public class MenuFragment extends Fragment {
      * @return A new instance of fragment MenuFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuFragment newInstance(String param1, String param2) {
+    public MenuFragment newInstance(String param1, String param2) {
         MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
+        //seteo las variables
+        this.entrada_c = this.principal_c = this.postre_c = this.entrada_c = this.principal_c
+                = this.postre_c = "(Sin información)";
+
         return fragment;
     }
 
@@ -76,8 +94,6 @@ public class MenuFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
@@ -85,8 +101,13 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
+        this.t_entrada = (TextView) view.findViewById(R.id.entrada); //instancie al texview del xml
+        this.t_principal = (TextView) view.findViewById(R.id.principal); //instancie al texview del xml
+        this.t_postre = (TextView) view.findViewById(R.id.postre); //instancie al texview del xml
+        this.botonActualizar = (Button) view.findViewById(R.id.botonVerMenu);
+
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         //webservice publico fake , ingresar a la url para ver la estructura json de los datos
@@ -103,25 +124,34 @@ public class MenuFragment extends Fragment {
                     //accedo a menu regular
                     JSONArray jregular = jso.getJSONArray("regular");
                     //accedo al primer elemento
-                    JSONObject s = jregular.getJSONObject(0);
-                    String  entrada_n,plato_n,postre_n;
+                    JSONObject item = jregular.getJSONObject(0);
 
-                    entrada_n = s.getString("entrada");
-                    plato_n = s.getString("plato");
-                    postre_n = s.getString("postre");
+                    entrada_n = item.getString("entrada");
+                    principal_n = item.getString("plato");
+                    postre_n = item.getString("postre");
 
+                    //por defecto se muestra el menu regular
+                    t_entrada.setText(entrada_n);
+                    t_principal.setText(principal_n);
+                    t_postre.setText(postre_n);
 
-                   // Toast.makeText(getActivity().getApplicationContext(), entrada_s, Toast.LENGTH_LONG).show();
+                    //obtengo el menu para celiacos y lo guardo
+                    JSONArray jceliaco = jso.getJSONArray("celiaco");
+                    //accedo al primer item
+                    item = jceliaco.getJSONObject(0);
+
+                    entrada_c = item.getString("entrada");
+                    principal_c = item.getString("plato");
+                    postre_c = item.getString("postre");
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
-                    //Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         });
         queue.add(stringRequest);
@@ -130,8 +160,9 @@ public class MenuFragment extends Fragment {
         queue.add(stringRequest);
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        //return inflater.inflate(R.layout.fragment_menu, container, false);
 
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -180,4 +211,32 @@ public class MenuFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+
+    public void mostrarMenues(String botonTexto)
+    {
+        if(botonTexto.equals("Menú Celiaco"))
+        {
+            //Muestro el menu para celiacos
+            t_entrada.setText(entrada_c);
+            t_principal.setText(principal_c);
+            t_postre.setText(postre_c);
+
+            //seteo texto del boton
+            botonActualizar.setText("VOLVER");
+        }
+        else if(botonTexto.equals("VOLVER"))
+        {
+            //Muestro el menu para celiacos
+            t_entrada.setText(entrada_n);
+            t_principal.setText(principal_n);
+            t_postre.setText(postre_n);
+
+            //seteo texto del boton
+            botonActualizar.setText("MENÚ CELIACO");
+        }
+        else
+        {
+            Toast.makeText(getActivity().getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+        }
+    }
 }

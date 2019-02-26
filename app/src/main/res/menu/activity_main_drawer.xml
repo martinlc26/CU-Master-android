@@ -18,6 +18,10 @@
             android:id="@+id/comedorUniversitario"
             android:icon="@drawable/ic_restaurant_black_24dp"
             android:title="Menú del comedor" />
+        <item
+            android:id="@+id/Bedelia"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="Bedelia Movil" />
     </group>
 
 <!--    <item android:title="Communicate">
