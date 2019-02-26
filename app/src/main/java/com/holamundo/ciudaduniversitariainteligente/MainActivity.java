@@ -198,10 +198,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //fm.popBackStack();
                 fm.beginTransaction().replace(R.id.fragment_container, ultimasBusquedas).addToBackStack(null).commit();
             }
-        }
-        else if (id == R.id.comedorUniversitario)
+        } else if (id == R.id.comedorUniversitario)
         {
-            if (!(fm.findFragmentById(R.id.fragment_container) instanceof ultimasBusquedas)) {
+            if (!(fm.findFragmentById(R.id.fragment_container) instanceof MenuFragment)) {
                 qrBoton.hide();
                 menu.clear();
                 //fm.popBackStack();
