@@ -146,8 +146,12 @@ public class BedeliaMovil extends ListFragment {
                         JSONArray listadoClases = listaHorariosFacultades.getJSONArray(facultad);
 
                         int tamanio = listadoClases.length();
+                        //inicializo la lista de mensajes a mostrar
                         String mensaje = "\n";
-                        //lista.add(mensaje);
+                        //borro la lista
+                        lista.clear();
+                        listaClases.setAdapter(null);
+
                         for(int i=0;i<tamanio;i++)
                         {
                             JSONObject tmp = (JSONObject) listadoClases.get(i);
@@ -169,8 +173,9 @@ public class BedeliaMovil extends ListFragment {
                     }
                     catch (JSONException e)
                     {
+                        listaClases.setAdapter(null);
                         e.printStackTrace();
-                        Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "NO SE ENCONTRARON HORARIOS DE CURSADO", Toast.LENGTH_LONG).show();
                     }
                 }
             }, new Response.ErrorListener() {
