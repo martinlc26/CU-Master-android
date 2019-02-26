@@ -187,7 +187,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
         //POLILINEA PARA RECORRIDO
 
-        final Polyline linea13_afacu = miMapa.addPolyline(new PolylineOptions()
+/*        final Polyline linea13_afacu = miMapa.addPolyline(new PolylineOptions()
                 .clickable(false)
                 .color(Color.GREEN)
                 .width(8f)
@@ -196,9 +196,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                         new LatLng(-31.641380, -60.677363),
                         new LatLng(-31.639213, -60.685940),
                         new LatLng(-31.633476, -60.713075)
-                ));
+                ));*/
 
-        final Polyline linea13_acentro = miMapa.addPolyline(new PolylineOptions()
+/*        final Polyline linea13_acentro = miMapa.addPolyline(new PolylineOptions()
                 .clickable(false)
                 .color(Color.BLUE)
                 .width(8f)
@@ -209,9 +209,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                         new LatLng(-31.640417, -60.684307),
                         new LatLng(-31.641075, -60.676357),
                         new LatLng(-31.640935, -60.671913)
-                ));
-        linea13_acentro.setVisible(false);
-        linea13_afacu.setVisible(false);
+                ));*/
+        //linea13_acentro.setVisible(false);
+        //linea13_afacu.setVisible(false);
         //
         //
         String[] itemsSC = {" --- ", "Linea 13 a CU", "Linea 13 a centro"};
@@ -225,20 +225,37 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (spinner_colectivo.getSelectedItem().toString()) {
                     case " --- ":
-                        linea13_acentro.setVisible(false);
-                        linea13_afacu.setVisible(false);
+
                         break;
                     case "Linea 13 a CU":
-                        //Lista de edificios que hay cargados. Debería hacer una función en ArmaCamino que me devuelva esta lista
-                        //para no tener que actualiarlo si agrego un nodo en un edificio nuevo
-                        linea13_acentro.setVisible(false);
-                        linea13_afacu.setVisible(true);
+                        limpiarMapa();
+                        final Polyline linea13_afacu = miMapa.addPolyline(new PolylineOptions()
+                                .clickable(false)
+                                .color(Color.GREEN)
+                                .width(8f)
+                                .add(
+                                        new LatLng(-31.640935, -60.671913),
+                                        new LatLng(-31.641380, -60.677363),
+                                        new LatLng(-31.639213, -60.685940),
+                                        new LatLng(-31.633476, -60.713075)
+                                ));
+
                         break;
                     case "Linea 13 a centro":
-                        //Lista de edificios que hay cargados. Debería hacer una función en ArmaCamino que me devuelva esta lista
-                        //para no tener que actualiarlo si agrego un nodo en un edificio nuevo
-                        linea13_acentro.setVisible(true);
-                        linea13_afacu.setVisible(false);
+                        limpiarMapa();
+                        final Polyline linea13_acentro = miMapa.addPolyline(new PolylineOptions()
+                                .clickable(false)
+                                .color(Color.BLUE)
+                                .width(8f)
+                                .add(
+                                        new LatLng(-31.647094, -60.703093),
+                                        new LatLng(-31.644299, -60.688416),
+                                        new LatLng(-31.641760, -60.685101),
+                                        new LatLng(-31.640417, -60.684307),
+                                        new LatLng(-31.641075, -60.676357),
+                                        new LatLng(-31.640935, -60.671913)
+                                ));
+
                         break;
                 }
             }
@@ -834,6 +851,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         spinner_colectivo.setVisibility(View.GONE);
         botonCerrar.setVisibility(View.GONE);
         botonColectivo.setVisibility(View.VISIBLE);
+        limpiarMapa();
     }
 
 
