@@ -36,6 +36,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
@@ -60,6 +61,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -188,6 +190,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         String[] itemsSC = {" --- ", "Linea 13", "Linea 13 a CU", "Linea 13 a centro"};
         ArrayAdapter<String> arraySC = new ArrayAdapter<String>(getActivity(), R.layout.spinner_layout, itemsSC);
         spinner_colectivo.setAdapter(arraySC);
+
 
         //OnItemSelectedListener para el spinner_colectivo, depende que
         // selecciono, habilito o deshabilito los otros spinners
@@ -464,6 +467,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                                         new LatLng(-31.676919,	-60.692609)
                                 ));
 
+                        final Marker mLinea13 = miMapa.addMarker(new MarkerOptions()
+                                .position(new LatLng(-31.640371, -60.672550))
+                                .title("Ciudad Universitaria")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                        );
 
                         break;
 
@@ -612,6 +620,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                                         new LatLng(-31.676217,	-60.693233),
                                         new LatLng(-31.676919,	-60.692609)
                                 ));
+                        final Marker mLinea13_facu = miMapa.addMarker(new MarkerOptions()
+                                .position(new LatLng(-31.640371, -60.672550))
+                                .title("Ciudad Universitaria")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                        );
 
                         break;
                     case "Linea 13 a centro":
@@ -743,6 +756,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                                         new LatLng(-31.64845,	            -60.716659),
                                         new LatLng(-31.648004,	            -60.718979)
                                 ));
+                        final Marker mLinea13_centro = miMapa.addMarker(new MarkerOptions()
+                                .position(new LatLng(-31.640371, -60.672550))
+                                .title("Ciudad Universitaria")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                        );
 
                         break;
                 }
