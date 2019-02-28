@@ -234,6 +234,22 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                                 .color(Color.GREEN)
                                 .width(8f)
                                 .add(
+                                        new LatLng(-31.647094, -60.703093),
+                                        new LatLng(-31.644299, -60.688416),
+                                        new LatLng(-31.641760, -60.685101),
+                                        new LatLng(-31.640417, -60.684307),
+                                        new LatLng(-31.641075, -60.676357),
+                                        new LatLng(-31.640935, -60.671913)
+                                ));
+
+                        break;
+                    case "Linea 13 a centro":
+                        limpiarMapa();
+                        final Polyline linea13_acentro = miMapa.addPolyline(new PolylineOptions()
+                                .clickable(false)
+                                .color(Color.BLUE)
+                                .width(8f)
+                                .add(
                                         new LatLng(-31.676926,	            -60.692626),
                                         new LatLng(-31.676026,	            -60.693392),
                                         new LatLng(-31.674954,	            -60.69432),
@@ -355,22 +371,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                                         new LatLng(-31.648725,	            -60.715325),
                                         new LatLng(-31.64845,	            -60.716659),
                                         new LatLng(-31.648004,	            -60.718979)
-                                ));
-
-                        break;
-                    case "Linea 13 a centro":
-                        limpiarMapa();
-                        final Polyline linea13_acentro = miMapa.addPolyline(new PolylineOptions()
-                                .clickable(false)
-                                .color(Color.BLUE)
-                                .width(8f)
-                                .add(
-                                        new LatLng(-31.647094, -60.703093),
-                                        new LatLng(-31.644299, -60.688416),
-                                        new LatLng(-31.641760, -60.685101),
-                                        new LatLng(-31.640417, -60.684307),
-                                        new LatLng(-31.641075, -60.676357),
-                                        new LatLng(-31.640935, -60.671913)
                                 ));
 
                         break;
