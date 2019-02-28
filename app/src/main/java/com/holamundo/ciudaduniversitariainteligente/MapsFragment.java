@@ -127,7 +127,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     private Spinner spinner_colectivo = null;
     private ImageButton botonColectivo = null;
     private ImageButton botonCerrar = null;
-    private Boolean bandera = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -191,6 +190,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         ArrayAdapter<String> arraySC = new ArrayAdapter<String>(getActivity(), R.layout.spinner_layout, itemsSC);
         spinner_colectivo.setAdapter(arraySC);
 
+        //pLinea13.setVisible(false);
 
         //OnItemSelectedListener para el spinner_colectivo, depende que
         // selecciono, habilito o deshabilito los otros spinners
@@ -470,9 +470,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                         final Marker mLinea13 = miMapa.addMarker(new MarkerOptions()
                                 .position(new LatLng(-31.640371, -60.672550))
                                 .title("Ciudad Universitaria")
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
                         );
-
+                        final Marker pLinea13a = miMapa.addMarker(new MarkerOptions()
+                                .position(new LatLng(-31.676985, -60.692558))
+                                .title("Parada")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))//parada
+                        );
                         break;
 
                     case "Linea 13 a CU":
@@ -623,9 +627,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                         final Marker mLinea13_facu = miMapa.addMarker(new MarkerOptions()
                                 .position(new LatLng(-31.640371, -60.672550))
                                 .title("Ciudad Universitaria")
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
                         );
-
+                        final Marker pLinea13b = miMapa.addMarker(new MarkerOptions()
+                                .position(new LatLng(-31.676985, -60.692558))
+                                .title("Parada")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))//parada
+                        );
                         break;
                     case "Linea 13 a centro":
                         limpiarMapa();
@@ -759,7 +767,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                         final Marker mLinea13_centro = miMapa.addMarker(new MarkerOptions()
                                 .position(new LatLng(-31.640371, -60.672550))
                                 .title("Ciudad Universitaria")
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                        );
+                        final Marker pLinea13c = miMapa.addMarker(new MarkerOptions()
+                                .position(new LatLng(-31.676985, -60.692558))
+                                .title("Parada")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))//parada
                         );
 
                         break;
