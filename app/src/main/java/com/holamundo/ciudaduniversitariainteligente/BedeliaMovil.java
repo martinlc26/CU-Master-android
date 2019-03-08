@@ -1,7 +1,5 @@
 package com.holamundo.ciudaduniversitariainteligente;
 
-import android.app.ListActivity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -119,8 +117,8 @@ public class BedeliaMovil extends ListFragment {
         return view;
     }
 
-    private void mostrarHorariosCursado(final String facultad)
-    {
+    private void mostrarHorariosCursado(final String facultad) {
+
         //llamo al webservice
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -128,14 +126,12 @@ public class BedeliaMovil extends ListFragment {
         String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
 
         //si selecciono un option del select, averiguo las clases
-        if(!facultad.equals(" --- "))
-        {
+        if (!facultad.equals(" --- ")) {
             //Toast.makeText(getActivity().getApplicationContext(), facultad, Toast.LENGTH_LONG).show();
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    try
-                    {
+                    try {
                         JSONObject jso = new JSONObject(response);
 
                         //accedo al subarray bedelia
@@ -152,27 +148,24 @@ public class BedeliaMovil extends ListFragment {
                         lista.clear();
                         listaClases.setAdapter(null);
 
-                        for(int i=0;i<tamanio;i++)
-                        {
+                        for (int i = 0; i < tamanio; i++) {
                             JSONObject tmp = (JSONObject) listadoClases.get(i);
-                            mensaje = " Aula: " +  tmp.getString("aula") + "\n" +
-                                     " Inicio: "+ tmp.getString("inicio") + " - Fin: " + tmp.getString("fin") + "\n" +
-                                     " Materia: " + tmp.getString("materia") + "\n" +
-                                     " Docentes: " + tmp.getString("docentes");
+                            mensaje = " Aula: " + tmp.getString("aula") + "\n" +
+                                    " Inicio: " + tmp.getString("inicio") + " - Fin: " + tmp.getString("fin") + "\n" +
+                                    " Materia: " + tmp.getString("materia") + "\n" +
+                                    " Docentes: " + tmp.getString("docentes");
 
                             lista.add(mensaje);
                         }
                         //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
-                        ArrayAdapter <String>adapter = new ArrayAdapter<String>
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>
                                 (getActivity().getApplicationContext(),
                                         R.layout.simple_list_item_1
-                                        ,R.id.rowTextView,
+                                        , R.id.rowTextView,
                                         lista);
                         //muestro
                         listaClases.setAdapter(adapter);
-                    }
-                    catch (JSONException e)
-                    {
+                    } catch (JSONException e) {
                         listaClases.setAdapter(null);
                         e.printStackTrace();
                         Toast.makeText(getActivity().getApplicationContext(), "NO SE ENCONTRARON HORARIOS DE CURSADO", Toast.LENGTH_LONG).show();
@@ -187,6 +180,7 @@ public class BedeliaMovil extends ListFragment {
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
         }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

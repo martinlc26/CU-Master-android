@@ -2,6 +2,9 @@ package com.holamundo.ciudaduniversitariainteligente;
 
 
 import android.Manifest;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
@@ -112,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fm.beginTransaction().replace(R.id.fragment_container, mapsFragment).addToBackStack(null).commit();
 
         //seteo la key en mapsfragment
-        mapsFragment.setKey("AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U");
-
+        mapsFragment.setKey("AIzaSyAz9DZZhgWn53Bd7bdVPtEH7GWwsWSNlSo");
+        //api vieja: AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U
     }
 
     @Override
@@ -187,7 +190,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mapsFragment.limpiarMapa();
             menu.clear();
             if (!(fm.findFragmentById(R.id.fragment_container) instanceof MapsFragment)) {
-                qrBoton.show();
+                //qrBoton.show();
+                qrBoton.hide();
                 fm.beginTransaction().replace(R.id.fragment_container, mapsFragment).addToBackStack(null).commit();
             }
 
@@ -198,22 +202,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //fm.popBackStack();
                 fm.beginTransaction().replace(R.id.fragment_container, ultimasBusquedas).addToBackStack(null).commit();
             }
-        } else if (id == R.id.comedorUniversitario)
-        {
+        } else if (id == R.id.comedorUniversitario) {
             if (!(fm.findFragmentById(R.id.fragment_container) instanceof MenuFragment)) {
                 qrBoton.hide();
                 menu.clear();
                 //fm.popBackStack();
                 fm.beginTransaction().replace(R.id.fragment_container,menuFragment).addToBackStack(null).commit();
             }
-        } else if(id == R.id.Bedelia)
-        {
-            if (!(fm.findFragmentById(R.id.fragment_container) instanceof BedeliaMovil)) {
-                qrBoton.hide();
-                menu.clear();
-                //fm.popBackStack();
-                fm.beginTransaction().replace(R.id.fragment_container,bedeliaMovil).addToBackStack(null).commit();
-            }
+
+        } else if(id == R.id.Bedelia) {
+            boolean bandera = hayConexion();
+            if (bandera){
+                if (!(fm.findFragmentById(R.id.fragment_container) instanceof BedeliaMovil)) {
+                    qrBoton.hide();
+                    menu.clear();
+                    //fm.popBackStack();
+                    fm.beginTransaction().replace(R.id.fragment_container, bedeliaMovil).addToBackStack(null).commit();
+                }
+            } else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -327,16 +333,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void mostrarCaminoCaminando(android.view.View view)
     {
   //      Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
-
-        this.mapsFragment.mostrarCaminoCaminando();
+        boolean bandera = hayConexion();
+        if (bandera)
+            this.mapsFragment.mostrarCaminoCaminando();
+        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
     }
 
     //evento para trazar la ruta si se va manejando
     public void mostrarCaminoManejando(android.view.View view)
     {
 //        Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
-
-        this.mapsFragment.mostrarCaminoManejando();
+        boolean bandera = hayConexion();
+        if (bandera)
+            this.mapsFragment.mostrarCaminoManejando();
+        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
     }
 
     //abro el cuando pasa en el navegador del celular
@@ -364,12 +374,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para actualizar los menus
     public void mostrarMenuComedor(android.view.View view)
     {
+        boolean bandera = hayConexion();
+        if (bandera){
+            Button boton = (Button)view;
+            String botonTexto = boton.getText().toString();
+            //Toast.makeText(this,botonTexto, Toast.LENGTH_LONG).show();
+            this.menuFragment.mostrarMenues(botonTexto);
+        }
 
-        Button boton = (Button)view;
-        String botonTexto = boton.getText().toString();
-        //Toast.makeText(this,botonTexto, Toast.LENGTH_LONG).show();
+        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
 
-        this.menuFragment.mostrarMenues(botonTexto);
+    }
+
+    public boolean hayConexion() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean bandera = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        return bandera;
     }
 
 }
