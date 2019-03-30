@@ -146,7 +146,7 @@ public class MenuFragment extends Fragment {
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -236,7 +236,7 @@ public class MenuFragment extends Fragment {
         }
         else
         {
-            Toast.makeText(getActivity().getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Error: no hay menues disponibles.", Toast.LENGTH_LONG).show();
         }
     }
 }

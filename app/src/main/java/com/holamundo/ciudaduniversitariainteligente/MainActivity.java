@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fm.beginTransaction().replace(R.id.fragment_container, mapsFragment).addToBackStack(null).commit();
 
         //seteo la key en mapsfragment
-        mapsFragment.setKey("AIzaSyAz9DZZhgWn53Bd7bdVPtEH7GWwsWSNlSo");
+        mapsFragment.setKey("AIzaSyDQlExtS_lqpgRddgBh1jtBq4VwREwttcI");
         //api vieja: AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U
     }
 
