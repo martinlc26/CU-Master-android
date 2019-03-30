@@ -933,7 +933,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         //return "https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
     }
 
-/*    private void mostrarDistanciaTiempo(JSONObject jso)
+    private void mostrarDistanciaTiempo(JSONObject jso)
     {
         try
         {
@@ -965,7 +965,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             e.printStackTrace();
         }
     }
-
+/*
     private void trazarRuta(JSONObject jso)
     {
 
@@ -1148,6 +1148,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             try{
                 jObject = new JSONObject(jsonData[0]);
                 DirectionsJSONParser parser = new DirectionsJSONParser();
+                ////
+                mostrarDistanciaTiempo(jObject); ////
+                ////
 
                 routes = parser.parse(jObject);
             }catch(Exception e){

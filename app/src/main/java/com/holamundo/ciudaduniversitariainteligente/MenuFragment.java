@@ -2,6 +2,7 @@ package com.holamundo.ciudaduniversitariainteligente;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.style.TtsSpan;
@@ -23,6 +24,15 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -84,6 +94,9 @@ public class MenuFragment extends Fragment {
         this.entrada_c = this.principal_c = this.postre_c = this.entrada_c = this.principal_c
                 = this.postre_c = "(Sin información)";
 
+        this.entrada_n = this.principal_n = this.postre_n = this.entrada_n = this.principal_n
+                = this.postre_n = "(Sin información)";
+
         return fragment;
     }
 
@@ -108,61 +121,119 @@ public class MenuFragment extends Fragment {
         this.t_postre = (TextView) view.findViewById(R.id.postre); //instancie al texview del xml
         this.botonActualizar = (Button) view.findViewById(R.id.botonVerMenu);
 
-        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-
         //webservice publico fake , ingresar a la url para ver la estructura json de los datos
         String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try
-                {
-                    JSONObject jso = new JSONObject(response);
-
-                    //accedo a menu regular
-                    JSONArray jregular = jso.getJSONArray("regular");
-                    //accedo al primer elemento
-                    JSONObject item = jregular.getJSONObject(0);
-
-                    entrada_n = item.getString("entrada");
-                    principal_n = item.getString("plato");
-                    postre_n = item.getString("postre");
-
-                    //por defecto se muestra el menu regular
-                    t_entrada.setText(entrada_n);
-                    t_principal.setText(principal_n);
-                    t_postre.setText(postre_n);
-
-                    //obtengo el menu para celiacos y lo guardo
-                    JSONArray jceliaco = jso.getJSONArray("celiaco");
-                    //accedo al primer item
-                    item = jceliaco.getJSONObject(0);
-
-                    entrada_c = item.getString("entrada");
-                    principal_c = item.getString("plato");
-                    postre_c = item.getString("postre");
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(stringRequest);
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_menu, container, false);
-
+        DownloadTask downloadTask = new DownloadTask();
+        downloadTask.execute(url);
         return view;
+    }
+
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... url) {
+
+            String data = "";
+
+            try{
+                data = downloadUrl(url[0]);
+            }catch(Exception e){
+                Log.d("ERROR",e.toString());
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ParserTask parserTask = new ParserTask();
+            //debug: para ver si obtuve datos de la query
+            //Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
+            parserTask.execute(result);
+        }
+    }
+
+    private class ParserTask extends AsyncTask<String, Void, Void >{
+
+        @Override
+        protected Void doInBackground(String... jsonData) {
+
+            try
+            {
+                JSONObject jso = new JSONObject(jsonData[0]);
+
+                //accedo a menu regular
+                JSONArray jregular = jso.getJSONArray("regular");
+                //accedo al primer elemento
+                JSONObject item = jregular.getJSONObject(0);
+
+                entrada_n = item.getString("entrada");
+                principal_n = item.getString("plato");
+                postre_n = item.getString("postre");
+
+                //obtengo el menu para celiacos y lo guardo
+                JSONArray jceliaco = jso.getJSONArray("celiaco");
+                //accedo al primer item
+                item = jceliaco.getJSONObject(0);
+
+                entrada_c = item.getString("entrada");
+                principal_c = item.getString("plato");
+                postre_c = item.getString("postre");
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            //por defecto se muestra el menu regular
+            t_entrada.setText(entrada_n);
+            t_principal.setText(principal_n);
+            t_postre.setText(postre_n);
+        }
+    }
+
+    private String downloadUrl(String strUrl) throws IOException {
+        String data = "";
+        InputStream iStream = null;
+        HttpURLConnection urlConnection = null;
+        try{
+            URL url = new URL(strUrl);
+
+            // Creamos una conexion http
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            // Conectamos
+            urlConnection.connect();
+
+            // Leemos desde URL
+            iStream = urlConnection.getInputStream();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
+
+            StringBuffer sb = new StringBuffer();
+
+            String line = "";
+            while( ( line = br.readLine()) != null){
+                sb.append(line);
+            }
+
+            data = sb.toString();
+
+            br.close();
+
+        }catch(Exception e){
+            Log.d("Exception", e.toString());
+        }finally{
+            iStream.close();
+            urlConnection.disconnect();
+        }
+        return data;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -222,9 +293,9 @@ public class MenuFragment extends Fragment {
             t_postre.setText(postre_c);
 
             //seteo texto del boton
-            botonActualizar.setText("VOLVER");
+            botonActualizar.setText("Volver");
         }
-        else if(botonTexto.equals("VOLVER"))
+        else if(botonTexto.equals("Volver"))
         {
             //Muestro el menu para celiacos
             t_entrada.setText(entrada_n);
@@ -232,7 +303,7 @@ public class MenuFragment extends Fragment {
             t_postre.setText(postre_n);
 
             //seteo texto del boton
-            botonActualizar.setText("MENÚ CELIACO");
+            botonActualizar.setText("Menú Celiaco");
         }
         else
         {
