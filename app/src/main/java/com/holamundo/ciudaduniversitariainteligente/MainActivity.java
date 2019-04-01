@@ -374,15 +374,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para actualizar los menus
     public void mostrarMenuComedor(android.view.View view)
     {
-        boolean bandera = hayConexion();
-        if (bandera){
+//        boolean bandera = hayConexion();
+//        if (bandera){
+//            Button boton = (Button)view;
+//            String botonTexto = boton.getText().toString();
+//            //Toast.makeText(this,botonTexto, Toast.LENGTH_LONG).show();
+//            this.menuFragment.mostrarMenues(botonTexto);
+//        }
+//
+//        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
             Button boton = (Button)view;
             String botonTexto = boton.getText().toString();
             //Toast.makeText(this,botonTexto, Toast.LENGTH_LONG).show();
             this.menuFragment.mostrarMenues(botonTexto);
-        }
 
-        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
+    }
+
+    //evento para recargar el menu
+    public void recargarMenuComedor(android.view.View view)
+    {
+
+        this.menuFragment.recargarMenu();
 
     }
 

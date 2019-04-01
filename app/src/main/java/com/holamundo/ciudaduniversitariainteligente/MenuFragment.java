@@ -1,6 +1,7 @@
 package com.holamundo.ciudaduniversitariainteligente;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +57,7 @@ public class MenuFragment extends Fragment {
     private TextView t_principal;
     private TextView t_postre;
     private Button botonActualizar;
+    private ImageButton botonRecargar;
 
     //variables para guardar las partes del menu
     private String entrada_n;
@@ -120,6 +123,7 @@ public class MenuFragment extends Fragment {
         this.t_principal = (TextView) view.findViewById(R.id.principal); //instancie al texview del xml
         this.t_postre = (TextView) view.findViewById(R.id.postre); //instancie al texview del xml
         this.botonActualizar = (Button) view.findViewById(R.id.botonVerMenu);
+        this.botonRecargar = (ImageButton) view.findViewById(R.id.botonRecargar);
 
         //webservice publico fake , ingresar a la url para ver la estructura json de los datos
         String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
@@ -138,7 +142,7 @@ public class MenuFragment extends Fragment {
             try{
                 data = downloadUrl(url[0]);
             }catch(Exception e){
-                Log.d("ERROR",e.toString());
+                Log.d("Error: no URL available",e.toString());
             }
             return data;
         }
@@ -147,10 +151,13 @@ public class MenuFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
+            if (result == "") {
+                Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+            } else {
             ParserTask parserTask = new ParserTask();
             //debug: para ver si obtuve datos de la query
-            //Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
-            parserTask.execute(result);
+            Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
+            parserTask.execute(result); }
         }
     }
 
@@ -224,7 +231,6 @@ public class MenuFragment extends Fragment {
             }
 
             data = sb.toString();
-
             br.close();
 
         }catch(Exception e){
@@ -309,5 +315,12 @@ public class MenuFragment extends Fragment {
         {
             Toast.makeText(getActivity().getApplicationContext(), "Error: no hay menues disponibles.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void recargarMenu()
+    {
+        String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
+        DownloadTask downloadTask = new DownloadTask();
+        downloadTask.execute(url);
     }
 }

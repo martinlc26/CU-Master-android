@@ -98,15 +98,23 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="0.1" />
 
-        <!--botones -->
+    <!--botones -->
 
         <Button
             android:id="@+id/botonVerMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_weight="0.1"
             android:onClick="mostrarMenuComedor"
             android:text="Menú Celiaco" />
+
+        <ImageButton
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_replay_black_24dp"
+            android:id="@+id/botonRecargar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:onClick="recargarMenuComedor"/>
     </LinearLayout>
 </FrameLayout>
