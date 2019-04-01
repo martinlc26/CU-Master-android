@@ -1,9 +1,12 @@
 package com.holamundo.ciudaduniversitariainteligente;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -47,6 +56,10 @@ public class BedeliaMovil extends ListFragment {
     private Spinner spinnerFacultad = null;
     private ListView listaClases = null;
     private ArrayList<String> lista;
+
+    //private String facultad;
+
+    ProgressDialog p;
 
 
     public BedeliaMovil() {
@@ -117,15 +130,143 @@ public class BedeliaMovil extends ListFragment {
         return view;
     }
 
-    private void mostrarHorariosCursado(final String facultad) {
-
-        //llamo al webservice
-        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+    private void mostrarHorariosCursado(final String facultad) { //final String facultad
 
         //webservice publico fake , ingresar a la url para ver la estructura json de los datos
         String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
+        DownloadTask downloadTask = new DownloadTask();
+        downloadTask.execute(url);
+    }
 
-        //si selecciono un option del select, averiguo las clases
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            p = new ProgressDialog(getActivity());
+            p.setMessage("Descargando información, espere...");
+            p.setIndeterminate(false);
+            p.setCancelable(false);
+            p.show();
+        }
+
+        @Override
+        protected String doInBackground(String... url) {
+
+            String data = "";
+
+            try{
+                data = downloadUrl(url[0]);
+            }catch(Exception e){
+                Log.d("Error: no URL available",e.toString());
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            p.hide();
+            if (result == "") {
+                Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+            } else {
+                BedeliaMovil.ParserTask parserTask = new BedeliaMovil.ParserTask();
+                //debug: para ver si obtuve datos de la query
+                //Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
+                parserTask.execute(result); }
+        }
+    }
+
+    private class ParserTask extends AsyncTask<String, Void, Void >{
+
+        @Override
+        protected Void doInBackground(String... jsonData) {
+                try {
+                    JSONObject jso = new JSONObject(jsonData[0]);
+
+                    //accedo al subarray bedelia
+                    JSONArray jregular = jso.getJSONArray("bedelia");
+                    //accedo al primer elemento (listado de facultades)
+                    JSONObject listaHorariosFacultades = jregular.getJSONObject(0);
+                    //accedo al listado de la facultad
+                    JSONArray listadoClases = listaHorariosFacultades.getJSONArray("FICH");
+
+                    int tamanio = listadoClases.length();
+                    //inicializo la lista de mensajes a mostrar
+                    String mensaje = "\n";
+                    //borro la lista
+                    lista.clear();
+                    listaClases.setAdapter(null);
+
+                    for (int i = 0; i < tamanio; i++) {
+                        JSONObject tmp = (JSONObject) listadoClases.get(i);
+                        mensaje = " Aula: " + tmp.getString("aula") + "\n" +
+                                " Inicio: " + tmp.getString("inicio") + " - Fin: " + tmp.getString("fin") + "\n" +
+                                " Materia: " + tmp.getString("materia") + "\n" +
+                                " Docentes: " + tmp.getString("docentes");
+
+                        lista.add(mensaje);
+                    }
+                    //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                            (getActivity().getApplicationContext(),
+                                    R.layout.simple_list_item_1
+                                    , R.id.rowTextView,
+                                    lista);
+                    //muestro
+                    listaClases.setAdapter(adapter);
+                } catch (JSONException e) {
+                    listaClases.setAdapter(null);
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado.", Toast.LENGTH_LONG).show();
+                }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
+    }
+
+    private String downloadUrl(String strUrl) throws IOException {
+        String data = "";
+        InputStream iStream = null;
+        HttpURLConnection urlConnection = null;
+        try{
+            URL url = new URL(strUrl);
+
+            // Creamos una conexion http
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            // Conectamos
+            urlConnection.connect();
+
+            // Leemos desde URL
+            iStream = urlConnection.getInputStream();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
+
+            StringBuffer sb = new StringBuffer();
+
+            String line = "";
+            while( ( line = br.readLine()) != null){
+                sb.append(line);
+            }
+
+            data = sb.toString();
+            br.close();
+
+        }catch(Exception e){
+            Log.d("Exception", e.toString());
+        }finally{
+            iStream.close();
+            urlConnection.disconnect();
+        }
+        return data;
+    }
+
+
+/*        //si selecciono un option del select, averiguo las clases
         if (!facultad.equals(" --- ")) {
             //Toast.makeText(getActivity().getApplicationContext(), facultad, Toast.LENGTH_LONG).show();
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -179,9 +320,9 @@ public class BedeliaMovil extends ListFragment {
 
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
-        }
+        }*/
 
-    }
+    //}
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

@@ -211,15 +211,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         } else if(id == R.id.Bedelia) {
-            boolean bandera = hayConexion();
-            if (bandera){
-                if (!(fm.findFragmentById(R.id.fragment_container) instanceof BedeliaMovil)) {
-                    qrBoton.hide();
-                    menu.clear();
-                    //fm.popBackStack();
-                    fm.beginTransaction().replace(R.id.fragment_container, bedeliaMovil).addToBackStack(null).commit();
+            //boolean bandera = hayConexion();
+            //if (bandera){
+            if (!(fm.findFragmentById(R.id.fragment_container) instanceof BedeliaMovil)) {
+                qrBoton.hide();
+                menu.clear();
+                //fm.popBackStack();
+                fm.beginTransaction().replace(R.id.fragment_container, bedeliaMovil).addToBackStack(null).commit();
                 }
-            } else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
+            //} else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -679,8 +679,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         marcadoresPiso.clear();
         //misOverlays.clear();
         miMapa.clear();
-        if (bandera_pos)
-        miMapa.addMarker(miPosicion);
+        if (bandera_pos) miPosicionMarcador = miMapa.addMarker(miPosicion);
         setPisoActual(0);
     }
 
@@ -852,7 +851,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     public void cambiarPolilinea(int piso) {
         miMapa.clear();
 
-        if (bandera_pos) miMapa.addMarker(miPosicion);
+        if (bandera_pos) miPosicionMarcador = miMapa.addMarker(miPosicion);
+
 
         miMapa.addPolyline(misPolilineas.elementAt(piso));
         miMapa.addMarker(marcadoresPiso.elementAt(2 * piso));
@@ -870,8 +870,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     public void cambiarNodos(int piso) {
         miMapa.clear();
 
-        if (bandera_pos) miMapa.addMarker(miPosicion);
-
+        if (bandera_pos) miPosicionMarcador = miMapa.addMarker(miPosicion);
         for (int i = 0; i < misMarcadores.size(); i++) {
             if (piso == 0) {
                 if (misMarcadores.elementAt(i).getTitle().contains("Planta Baja")) {
@@ -1258,14 +1257,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     public void mostrarPosicion(){
         pos_on.setVisibility(View.GONE);
         pos_off.setVisibility(View.VISIBLE);
-        bandera_pos = true;
-
         LatLng position = new LatLng(this.lat, this.lon);
         miMapa.moveCamera(CameraUpdateFactory.newLatLng(position));
         miMapa.moveCamera(CameraUpdateFactory.zoomTo(18));
         miPosicion = new MarkerOptions().position(new LatLng(this.lat, this.lon)).title("Usted está aquí");
         miPosicionMarcador = miMapa.addMarker(miPosicion);
         Toast.makeText(getActivity().getApplicationContext(), "Posición Activada", Toast.LENGTH_SHORT).show();
+        bandera_pos = true;
 
         //handlePosicion(bandera_pos);
     }
@@ -1273,9 +1271,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     public void ocultarPosicion(){
         pos_off.setVisibility(View.GONE);
         pos_on.setVisibility(View.VISIBLE);
-        bandera_pos = false;
-        Toast.makeText(getActivity().getApplicationContext(), "Posición desactivada", Toast.LENGTH_SHORT).show();
         miPosicionMarcador.remove();
+        Toast.makeText(getActivity().getApplicationContext(), "Posición desactivada", Toast.LENGTH_SHORT).show();
+        bandera_pos = false;
 
         //handlePosicion(bandera_pos);
     }
