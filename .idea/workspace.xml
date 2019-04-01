@@ -13,15 +13,10 @@
     <list default="true" id="0244a0d8-6317-4893-a478-947e9b47bc67" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MapsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MapsFragment.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,41 +61,43 @@
       <file leaf-file-name="MenuFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MenuFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
+            <state relative-caret-position="15">
               <caret line="174" column="5" lean-forward="false" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapsFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MapsFragment.java">
+      <file leaf-file-name="BedeliaMovil.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/BedeliaMovil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="872" column="25" lean-forward="false" selection-start-line="872" selection-start-column="25" selection-end-line="872" selection-end-column="25" />
+            <state relative-caret-position="-90">
+              <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
               <folding>
-                <element signature="e#7737#7947#0" expanded="true" />
-                <element signature="e#7946#7947#0" expanded="true" />
-                <element signature="e#8094#8102#0" expanded="true" />
-                <element signature="e#33349#33350#0" expanded="true" />
-                <element signature="e#33402#33403#0" expanded="true" />
-                <element signature="e#42765#42766#0" expanded="true" />
-                <element signature="e#42802#42803#0" expanded="true" />
-                <element signature="e#49037#49067#0" expanded="true" />
-                <element signature="e#50043#50059#0" expanded="true" />
-                <element signature="e#50711#50719#0" expanded="true" />
-                <element signature="e#52957#52958#0" expanded="true" />
-                <element signature="e#52987#52988#0" expanded="true" />
+                <marker date="1553977402547" expanded="true" signature="7477:7631" ph="{...}" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_bedelia_movil.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_bedelia_movil.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="fragment_map.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+            <state relative-caret-position="345">
+              <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -145,11 +142,11 @@
       <find>mostrarPosicion</find>
       <find>Toast</find>
       <find>Usted</find>
-      <find>Usted Esta aquí</find>
       <find>limpiarMapa</find>
       <find>cambiarPolilinea</find>
       <find>camera</find>
       <find>movecamera</find>
+      <find>Usted Esta aquí</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2424,9 +2421,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MenuFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_my_location_black_24dp.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MapsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml" />
       </list>
     </option>
   </component>
@@ -2471,6 +2468,17 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="ciudaduniversitariainteligente" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CU-Master-android" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="CU-Master-android" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="CU-Master-android" type="1abcf292:AndroidViewProjectNode" />
@@ -2771,18 +2779,18 @@
         <state relative-caret-position="10380">
           <caret line="692" column="19" lean-forward="false" selection-start-line="692" selection-start-column="19" selection-end-line="692" selection-end-column="19" />
           <folding>
-            <element signature="e#7737#7947#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8094#8102#0" expanded="true" />
-            <element signature="e#33349#33350#0" expanded="true" />
-            <element signature="e#33402#33403#0" expanded="true" />
-            <element signature="e#42765#42766#0" expanded="true" />
-            <element signature="e#42802#42803#0" expanded="true" />
-            <element signature="e#49037#49067#0" expanded="true" />
-            <element signature="e#50043#50059#0" expanded="true" />
-            <element signature="e#50711#50719#0" expanded="true" />
-            <element signature="e#52957#52958#0" expanded="true" />
-            <element signature="e#52987#52988#0" expanded="true" />
+            <element signature="e#7737#7947#0" expanded="false" />
+            <element signature="e#7946#7947#0" expanded="false" />
+            <element signature="e#8094#8102#0" expanded="false" />
+            <element signature="e#33349#33350#0" expanded="false" />
+            <element signature="e#33402#33403#0" expanded="false" />
+            <element signature="e#42765#42766#0" expanded="false" />
+            <element signature="e#42802#42803#0" expanded="false" />
+            <element signature="e#49037#49067#0" expanded="false" />
+            <element signature="e#50043#50059#0" expanded="false" />
+            <element signature="e#50711#50719#0" expanded="false" />
+            <element signature="e#52957#52958#0" expanded="false" />
+            <element signature="e#52987#52988#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2816,18 +2824,18 @@
         <state relative-caret-position="17940">
           <caret line="1302" column="0" lean-forward="false" selection-start-line="1302" selection-start-column="0" selection-end-line="1302" selection-end-column="0" />
           <folding>
-            <element signature="e#7737#7947#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8094#8102#0" expanded="true" />
-            <element signature="e#33349#33350#0" expanded="true" />
-            <element signature="e#33402#33403#0" expanded="true" />
-            <element signature="e#42765#42766#0" expanded="true" />
-            <element signature="e#42802#42803#0" expanded="true" />
-            <element signature="e#49037#49067#0" expanded="true" />
-            <element signature="e#50043#50059#0" expanded="true" />
-            <element signature="e#50711#50719#0" expanded="true" />
-            <element signature="e#52957#52958#0" expanded="true" />
-            <element signature="e#52987#52988#0" expanded="true" />
+            <element signature="e#7737#7947#0" expanded="false" />
+            <element signature="e#7946#7947#0" expanded="false" />
+            <element signature="e#8094#8102#0" expanded="false" />
+            <element signature="e#33349#33350#0" expanded="false" />
+            <element signature="e#33402#33403#0" expanded="false" />
+            <element signature="e#42765#42766#0" expanded="false" />
+            <element signature="e#42802#42803#0" expanded="false" />
+            <element signature="e#49037#49067#0" expanded="false" />
+            <element signature="e#50043#50059#0" expanded="false" />
+            <element signature="e#50711#50719#0" expanded="false" />
+            <element signature="e#52957#52958#0" expanded="false" />
+            <element signature="e#52987#52988#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2919,18 +2927,18 @@
         <state relative-caret-position="10230">
           <caret line="786" column="48" lean-forward="false" selection-start-line="786" selection-start-column="48" selection-end-line="786" selection-end-column="48" />
           <folding>
-            <element signature="e#7737#7947#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8094#8102#0" expanded="true" />
-            <element signature="e#33349#33350#0" expanded="true" />
-            <element signature="e#33402#33403#0" expanded="true" />
-            <element signature="e#42765#42766#0" expanded="true" />
-            <element signature="e#42802#42803#0" expanded="true" />
-            <element signature="e#49037#49067#0" expanded="true" />
-            <element signature="e#50043#50059#0" expanded="true" />
-            <element signature="e#50711#50719#0" expanded="true" />
-            <element signature="e#52957#52958#0" expanded="true" />
-            <element signature="e#52987#52988#0" expanded="true" />
+            <element signature="e#7737#7947#0" expanded="false" />
+            <element signature="e#7946#7947#0" expanded="false" />
+            <element signature="e#8094#8102#0" expanded="false" />
+            <element signature="e#33349#33350#0" expanded="false" />
+            <element signature="e#33402#33403#0" expanded="false" />
+            <element signature="e#42765#42766#0" expanded="false" />
+            <element signature="e#42802#42803#0" expanded="false" />
+            <element signature="e#49037#49067#0" expanded="false" />
+            <element signature="e#50043#50059#0" expanded="false" />
+            <element signature="e#50711#50719#0" expanded="false" />
+            <element signature="e#52957#52958#0" expanded="false" />
+            <element signature="e#52987#52988#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2956,6 +2964,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -2990,18 +2999,18 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#7737#7947#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8094#8102#0" expanded="true" />
-            <element signature="e#33349#33350#0" expanded="true" />
-            <element signature="e#33402#33403#0" expanded="true" />
-            <element signature="e#42765#42766#0" expanded="true" />
-            <element signature="e#42802#42803#0" expanded="true" />
-            <element signature="e#49037#49067#0" expanded="true" />
-            <element signature="e#50043#50059#0" expanded="true" />
-            <element signature="e#50711#50719#0" expanded="true" />
-            <element signature="e#52957#52958#0" expanded="true" />
-            <element signature="e#52987#52988#0" expanded="true" />
+            <element signature="e#7737#7947#0" expanded="false" />
+            <element signature="e#7946#7947#0" expanded="false" />
+            <element signature="e#8094#8102#0" expanded="false" />
+            <element signature="e#33349#33350#0" expanded="false" />
+            <element signature="e#33402#33403#0" expanded="false" />
+            <element signature="e#42765#42766#0" expanded="false" />
+            <element signature="e#42802#42803#0" expanded="false" />
+            <element signature="e#49037#49067#0" expanded="false" />
+            <element signature="e#50043#50059#0" expanded="false" />
+            <element signature="e#50711#50719#0" expanded="false" />
+            <element signature="e#52957#52958#0" expanded="false" />
+            <element signature="e#52987#52988#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3105,16 +3114,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_bedelia_movil.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -3126,20 +3125,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/BedeliaMovil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="120" column="8" lean-forward="false" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
-          <folding>
-            <marker date="1553977402547" expanded="true" signature="7477:7631" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -3150,6 +3140,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1230">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -3160,6 +3151,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1710">
           <caret line="114" column="46" lean-forward="false" selection-start-line="114" selection-start-column="46" selection-end-line="114" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -3167,31 +3159,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_my_location_black_24dp.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MenuFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="174" column="5" lean-forward="false" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/Busqueda.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2163">
           <caret line="26" column="43" lean-forward="true" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MainActivity.java">
@@ -3215,18 +3188,58 @@
         <state relative-caret-position="479">
           <caret line="872" column="25" lean-forward="false" selection-start-line="872" selection-start-column="25" selection-end-line="872" selection-end-column="25" />
           <folding>
-            <element signature="e#7737#7947#0" expanded="true" />
-            <element signature="e#7946#7947#0" expanded="true" />
-            <element signature="e#8094#8102#0" expanded="true" />
-            <element signature="e#33349#33350#0" expanded="true" />
-            <element signature="e#33402#33403#0" expanded="true" />
-            <element signature="e#42765#42766#0" expanded="true" />
-            <element signature="e#42802#42803#0" expanded="true" />
-            <element signature="e#49037#49067#0" expanded="true" />
-            <element signature="e#50043#50059#0" expanded="true" />
-            <element signature="e#50711#50719#0" expanded="true" />
-            <element signature="e#52957#52958#0" expanded="true" />
-            <element signature="e#52987#52988#0" expanded="true" />
+            <element signature="e#7737#7947#0" expanded="false" />
+            <element signature="e#7946#7947#0" expanded="false" />
+            <element signature="e#8094#8102#0" expanded="false" />
+            <element signature="e#33349#33350#0" expanded="false" />
+            <element signature="e#33402#33403#0" expanded="false" />
+            <element signature="e#42765#42766#0" expanded="false" />
+            <element signature="e#42802#42803#0" expanded="false" />
+            <element signature="e#49037#49067#0" expanded="false" />
+            <element signature="e#50043#50059#0" expanded="false" />
+            <element signature="e#50711#50719#0" expanded="false" />
+            <element signature="e#52957#52958#0" expanded="false" />
+            <element signature="e#52987#52988#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/MenuFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="174" column="5" lean-forward="false" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_bedelia_movil.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/holamundo/ciudaduniversitariainteligente/BedeliaMovil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding>
+            <marker date="1553977402547" expanded="true" signature="7477:7631" ph="{...}" />
           </folding>
         </state>
       </provider>
