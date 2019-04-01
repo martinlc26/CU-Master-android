@@ -2,6 +2,7 @@ package com.holamundo.ciudaduniversitariainteligente;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
@@ -135,6 +136,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     private ImageButton botonColectivo = null;
     private ImageButton botonCerrar = null;
 
+    private ImageButton pos_off = null;
+    private ImageButton pos_on = null;
+
+    ProgressDialog p;
+    Boolean bandera_pos = true;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view != null) {
@@ -177,6 +184,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         botonColectivo.setVisibility(View.VISIBLE);
         botonCerrar = (ImageButton) view.findViewById(R.id.botonCerrar);
         botonCerrar.setVisibility(View.GONE);
+
+        pos_off = (ImageButton) view.findViewById(R.id.botonPosicionOff);
+        pos_off.setVisibility(View.VISIBLE);
+
+        pos_on = (ImageButton) view.findViewById(R.id.botonPosicionOn);
+        pos_on.setVisibility(View.GONE);
 
         return view;
     }
@@ -565,12 +578,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             }
         });
 
+        mostrarPosicion();
         //Muevo la camara hasta mi posicion y agrego un marcador allí
-        LatLng position = new LatLng(this.lat, this.lon);
+/*        LatLng position = new LatLng(this.lat, this.lon);
         miMapa.moveCamera(CameraUpdateFactory.newLatLng(position));
         miMapa.moveCamera(CameraUpdateFactory.zoomTo(18));
         miPosicion = new MarkerOptions().position(new LatLng(this.lat, this.lon)).title("Usted está aquí");
-        miPosicionMarcador = miMapa.addMarker(miPosicion);
+        miPosicionMarcador = miMapa.addMarker(miPosicion);*/
 
         //Agrego los marcadores adicionales (Edificios, baños, bares,etc), si los hay
         for (int i = 0; i < misMarcadores.size(); i++) {
@@ -676,6 +690,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         miMapa.moveCamera(CameraUpdateFactory.newLatLng(position));
         miPosicion.position(position);
         miPosicionMarcador.remove();
+        //COMPLETAR
         miPosicionMarcador = miMapa.addMarker(miPosicion);
 
         if (!misPolilineas.isEmpty() && pisoActual + 1 <= misPolilineas.size()) {
@@ -965,90 +980,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             e.printStackTrace();
         }
     }
-/*
-    private void trazarRuta(JSONObject jso)
-    {
-
-        JSONArray jRoutes;
-        JSONArray jLegs;
-        JSONArray jSteps;
-
-        try {
-            jRoutes = jso.getJSONArray("routes");
-            for (int i = 0; i < jRoutes.length(); i++) {
-
-                jLegs = ((JSONObject) (jRoutes.get(i))).getJSONArray("legs");
-
-                for (int j = 0; j < jLegs.length(); j++) {
-
-                    jSteps = ((JSONObject) jLegs.get(j)).getJSONArray("steps");
-
-                    for (int k = 0; k < jSteps.length(); k++) {
-
-
-                        String polyline = "" + ((JSONObject) ((JSONObject) jSteps.get(k)).get("polyline")).get("points");
-                        Log.i("end", "" + polyline);
-                        List<LatLng> list = PolyUtil.decode(polyline);
-                        miMapa.addPolyline(new PolylineOptions().addAll(list).color(Color.RED).width(10));
-                    }
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public void mostrarCaminoCaminando()
     {
         String url = armaUrl(true,this.lat,this.lon);
         Log.i("url: ",""+url);
-        /*
-        Double longi = this.lon;
-        Double lati = this.lat;
-        String coord = longi.toString() + "," + lati.toString();
-        Toast.makeText(getActivity().getApplicationContext(),coord, Toast.LENGTH_LONG).show();
-
-
-        Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
-
-
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jso = new JSONObject(response);
-                    Toast.makeText(getActivity().getApplicationContext(),jso.toString(), Toast.LENGTH_LONG).show();
-
-                    //trazo
-                    trazarRuta(jso);
-
-                    //muestro
-                    mostrarDistanciaTiempo(jso);
-
-                    Log.i("jsonRuta: ",""+response);
-
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        queue.add(stringRequest);
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);*/
+    //IMPLEMENTACION NUEVA
         DownloadTask downloadTask = new DownloadTask();
         downloadTask.execute(url);
     }
@@ -1056,51 +993,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     public void mostrarCaminoManejando()
     {
         String url = armaUrl(false,this.lat,this.lon);
-
         Log.i("url: ",""+url);
-/*
-        //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-
-        Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
-
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jso = new JSONObject(response);
-                    Toast.makeText(getActivity().getApplicationContext(),jso.toString(), Toast.LENGTH_LONG).show();
-
-                    //trazo
-                    //trazarRuta(jso);
-
-                    //muestro
-                    //mostrarDistanciaTiempo(jso);
-
-                    Log.i("jsonRuta: ",""+response);
-
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        queue.add(stringRequest);
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);*/
-
     //IMPLEMENTACION NUEVA
         DownloadTask downloadTask = new DownloadTask();
         downloadTask.execute(url);
@@ -1110,6 +1003,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     /////////////////////////////////////////////////////////**********************************
 
     private class DownloadTask extends AsyncTask<String, Void, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            p = new ProgressDialog(getActivity());
+            p.setMessage("Trazando ruta, espere...");
+            p.setIndeterminate(false);
+            p.setCancelable(false);
+            p.show();
+        }
 
         @Override
         protected String doInBackground(String... url) {
@@ -1127,11 +1029,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
+            p.hide();
+            if (result == "") {
+                Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
+            } else {
             ParserTask parserTask = new ParserTask();
             Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
-
-            parserTask.execute(result);
+            parserTask.execute(result); }
         }
     }
 
@@ -1344,7 +1248,41 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         limpiarMapa();
     }
 
+    public void mostrarPosicion(){
+        pos_on.setVisibility(View.GONE);
+        pos_off.setVisibility(View.VISIBLE);
+        //bandera_pos = true;
 
+        LatLng position = new LatLng(this.lat, this.lon);
+        miMapa.moveCamera(CameraUpdateFactory.newLatLng(position));
+        miMapa.moveCamera(CameraUpdateFactory.zoomTo(18));
+        miPosicion = new MarkerOptions().position(new LatLng(this.lat, this.lon)).title("Usted está aquí");
+        miPosicionMarcador = miMapa.addMarker(miPosicion);
+        Toast.makeText(getActivity().getApplicationContext(), "Posición Activada", Toast.LENGTH_LONG).show();
+
+        //handlePosicion(bandera_pos);
+    }
+
+    public void ocultarPosicion(){
+        pos_off.setVisibility(View.GONE);
+        pos_on.setVisibility(View.VISIBLE);
+        //bandera_pos = false;
+        Toast.makeText(getActivity().getApplicationContext(), "Posición desactivada", Toast.LENGTH_LONG).show();
+        miPosicionMarcador.remove();
+
+        //handlePosicion(bandera_pos);
+    }
+
+    public void handlePosicion(Boolean bandera_pos){
+        if (bandera_pos) {
+            //Muevo la camara hasta mi posicion y agrego un marcador allí
+            LatLng position = new LatLng(this.lat, this.lon);
+            miMapa.moveCamera(CameraUpdateFactory.newLatLng(position));
+            miMapa.moveCamera(CameraUpdateFactory.zoomTo(18));
+            miPosicion = new MarkerOptions().position(new LatLng(this.lat, this.lon)).title("Usted está aquí");
+            miPosicionMarcador = miMapa.addMarker(miPosicion);
+        } else miPosicionMarcador.remove();
+    }
 
 
 

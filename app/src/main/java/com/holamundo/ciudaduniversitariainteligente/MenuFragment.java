@@ -1,5 +1,6 @@
 package com.holamundo.ciudaduniversitariainteligente;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.media.Image;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -73,6 +75,8 @@ public class MenuFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    ProgressDialog p;
+
     public MenuFragment() {
         // Required empty public constructor
     }
@@ -134,6 +138,15 @@ public class MenuFragment extends Fragment {
 
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
+        protected void onPreExecute() {
+            super.onPreExecute();
+            p = new ProgressDialog(getActivity());
+            p.setMessage("Descargando información, espere...");
+            p.setIndeterminate(false);
+            p.setCancelable(false);
+            p.show();
+        }
+
         @Override
         protected String doInBackground(String... url) {
 
@@ -150,13 +163,13 @@ public class MenuFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
+            p.hide();
             if (result == "") {
                 Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             } else {
             ParserTask parserTask = new ParserTask();
             //debug: para ver si obtuve datos de la query
-            Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
             parserTask.execute(result); }
         }
     }

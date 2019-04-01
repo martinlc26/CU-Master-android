@@ -333,20 +333,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void mostrarCaminoCaminando(android.view.View view)
     {
   //      Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
-        boolean bandera = hayConexion();
-        if (bandera)
+//        boolean bandera = hayConexion();
+//        if (bandera)
             this.mapsFragment.mostrarCaminoCaminando();
-        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
+       // else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
     }
 
     //evento para trazar la ruta si se va manejando
     public void mostrarCaminoManejando(android.view.View view)
     {
-//        Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
-        boolean bandera = hayConexion();
-        if (bandera)
             this.mapsFragment.mostrarCaminoManejando();
-        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
     }
 
     //abro el cuando pasa en el navegador del celular
@@ -363,6 +359,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         this.mapsFragment.mostrarSpinnerColes();
     }
+
+    public void mostrarPosicion(android.view.View view)
+    {
+        this.mapsFragment.mostrarPosicion();
+    }
+
+    public void ocultarPosicion(android.view.View view)
+    {
+        this.mapsFragment.ocultarPosicion();
+    }
+
+//    public void handlePosition(android.view.View view)
+//    {
+//        this.mapsFragment.handlePosicion(boolean s);
+//    }
 
     public void cerrarColes(android.view.View view)
     {
@@ -393,9 +404,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para recargar el menu
     public void recargarMenuComedor(android.view.View view)
     {
-
         this.menuFragment.recargarMenu();
-
     }
 
     public boolean hayConexion() {
