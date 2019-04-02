@@ -168,9 +168,10 @@ public class MenuFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             } else {
             ParserTask parserTask = new ParserTask();
+            parserTask.execute(result);
             //debug: para ver si obtuve datos de la query
             //Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
-            parserTask.execute(result); }
+            }
         }
     }
 
@@ -211,7 +212,6 @@ public class MenuFragment extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            //por defecto se muestra el menu regular
             t_entrada.setText(entrada_n);
             t_principal.setText(principal_n);
             t_postre.setText(postre_n);

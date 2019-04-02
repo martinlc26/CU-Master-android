@@ -57,7 +57,7 @@ public class BedeliaMovil extends ListFragment {
     private ListView listaClases = null;
     private ArrayList<String> lista;
 
-    //private String facultad;
+    private String facultad;
 
     ProgressDialog p;
 
@@ -130,15 +130,21 @@ public class BedeliaMovil extends ListFragment {
         return view;
     }
 
-    private void mostrarHorariosCursado(final String facultad) { //final String facultad
+    public void mostrarHorariosCursado(String facultad) { //final String facultad
 
         //webservice publico fake , ingresar a la url para ver la estructura json de los datos
         String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
-        DownloadTask downloadTask = new DownloadTask();
+        DownloadTask downloadTask = new DownloadTask(facultad);
         downloadTask.execute(url);
     }
 
     private class DownloadTask extends AsyncTask<String, Void, String> {
+
+        String facultad;
+
+        DownloadTask(String f){
+            this.facultad = f;
+        }
 
         protected void onPreExecute() {
             super.onPreExecute();
@@ -169,34 +175,37 @@ public class BedeliaMovil extends ListFragment {
             if (result == "") {
                 Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             } else {
-                BedeliaMovil.ParserTask parserTask = new BedeliaMovil.ParserTask();
-                //debug: para ver si obtuve datos de la query
-                //Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
-                parserTask.execute(result); }
+                Toast.makeText(getActivity().getApplicationContext(), facultad + "downloadtask", Toast.LENGTH_LONG).show();
+                ParserTask parser = new ParserTask();
+                parser.execute(result, facultad);
+
+            }
         }
     }
 
-    private class ParserTask extends AsyncTask<String, Void, Void >{
+    private class ParserTask extends AsyncTask<String, Void, Void > {
 
         @Override
-        protected Void doInBackground(String... jsonData) {
+        protected Void doInBackground(String... strings) {
+            String json = strings[0];
+            String fac = strings[1];
+            if (!fac.equals(" --- ")) {
                 try {
-                    JSONObject jso = new JSONObject(jsonData[0]);
-
+                    JSONObject jso = new JSONObject(json);
                     //accedo al subarray bedelia
                     JSONArray jregular = jso.getJSONArray("bedelia");
                     //accedo al primer elemento (listado de facultades)
                     JSONObject listaHorariosFacultades = jregular.getJSONObject(0);
                     //accedo al listado de la facultad
-                    JSONArray listadoClases = listaHorariosFacultades.getJSONArray("FICH");
+                    JSONArray listadoClases = listaHorariosFacultades.getJSONArray(fac);
 
                     int tamanio = listadoClases.length();
                     //inicializo la lista de mensajes a mostrar
                     String mensaje = "\n";
                     //borro la lista
                     lista.clear();
-                    listaClases.setAdapter(null);
 
+                    //listaClases.setAdapter(null);
                     for (int i = 0; i < tamanio; i++) {
                         JSONObject tmp = (JSONObject) listadoClases.get(i);
                         mensaje = " Aula: " + tmp.getString("aula") + "\n" +
@@ -206,25 +215,34 @@ public class BedeliaMovil extends ListFragment {
 
                         lista.add(mensaje);
                     }
-                    //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                            (getActivity().getApplicationContext(),
-                                    R.layout.simple_list_item_1
-                                    , R.id.rowTextView,
-                                    lista);
-                    //muestro
-                    listaClases.setAdapter(adapter);
+
                 } catch (JSONException e) {
-                    listaClases.setAdapter(null);
+                    //listaClases.setAdapter(null);
                     e.printStackTrace();
                     Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado.", Toast.LENGTH_LONG).show();
                 }
+            }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            listaClases.setAdapter(null);
+            //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                    (getActivity().getApplicationContext(),
+                            R.layout.simple_list_item_1
+                            , R.id.rowTextView,
+                            lista);
+            //muestro
+            //ARREGLARRRRRRRRRRRRRRRR
+            if (listaClases !=null)
+            listaClases.setAdapter(adapter);
+            else {
+                listaClases.setAdapter(null);
+                Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
