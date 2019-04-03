@@ -57,8 +57,6 @@ public class BedeliaMovil extends ListFragment {
     private ListView listaClases = null;
     private ArrayList<String> lista;
 
-    private String facultad;
-
     ProgressDialog p;
 
 
@@ -183,11 +181,10 @@ public class BedeliaMovil extends ListFragment {
         }
     }
 
-
     private class ParserTask extends AsyncTask<String, Void, Integer > {
 
         @Override
-        protected Integer doInBackground(String... strings) { //Void doInBackgroud
+        protected Integer doInBackground(String... strings) {
             Integer bandera = 0;
             //valores de bandera:
             //0 = la opcion seleccionada es " -- "
@@ -231,7 +228,7 @@ public class BedeliaMovil extends ListFragment {
         }
 
         @Override
-        protected void onPostExecute(Integer result) { //Void result
+        protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
             //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
             ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -239,7 +236,7 @@ public class BedeliaMovil extends ListFragment {
                             R.layout.simple_list_item_1
                             , R.id.rowTextView,
                             lista);
-            if (result == 1) {//listaClases !=null
+            if (result == 1) {
                 listaClases.setAdapter(adapter);
             } else if (result == 2) {
                 listaClases.setAdapter(null);
@@ -284,65 +281,6 @@ public class BedeliaMovil extends ListFragment {
         }
         return data;
     }
-
-
-/*        //si selecciono un option del select, averiguo las clases
-        if (!facultad.equals(" --- ")) {
-            //Toast.makeText(getActivity().getApplicationContext(), facultad, Toast.LENGTH_LONG).show();
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jso = new JSONObject(response);
-
-                        //accedo al subarray bedelia
-                        JSONArray jregular = jso.getJSONArray("bedelia");
-                        //accedo al primer elemento (listado de facultades)
-                        JSONObject listaHorariosFacultades = jregular.getJSONObject(0);
-                        //accedo al listado de la facultad
-                        JSONArray listadoClases = listaHorariosFacultades.getJSONArray(facultad);
-
-                        int tamanio = listadoClases.length();
-                        //inicializo la lista de mensajes a mostrar
-                        String mensaje = "\n";
-                        //borro la lista
-                        lista.clear();
-                        listaClases.setAdapter(null);
-
-                        for (int i = 0; i < tamanio; i++) {
-                            JSONObject tmp = (JSONObject) listadoClases.get(i);
-                            mensaje = " Aula: " + tmp.getString("aula") + "\n" +
-                                    " Inicio: " + tmp.getString("inicio") + " - Fin: " + tmp.getString("fin") + "\n" +
-                                    " Materia: " + tmp.getString("materia") + "\n" +
-                                    " Docentes: " + tmp.getString("docentes");
-
-                            lista.add(mensaje);
-                        }
-                        //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                                (getActivity().getApplicationContext(),
-                                        R.layout.simple_list_item_1
-                                        , R.id.rowTextView,
-                                        lista);
-                        //muestro
-                        listaClases.setAdapter(adapter);
-                    } catch (JSONException e) {
-                        listaClases.setAdapter(null);
-                        e.printStackTrace();
-                        Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado.", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            });
-
-            // Add the request to the RequestQueue.
-            queue.add(stringRequest);
-        }*/
-
-    //}
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

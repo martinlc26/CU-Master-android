@@ -335,7 +335,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   //      Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
 //        boolean bandera = hayConexion();
 //        if (bandera)
-            this.mapsFragment.mostrarPosicion();
             this.mapsFragment.mostrarCaminoCaminando();
        // else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
     }
@@ -343,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para trazar la ruta si se va manejando
     public void mostrarCaminoManejando(android.view.View view)
     {
-            this.mapsFragment.mostrarPosicion();
+            //this.mapsFragment.mostrarPosicion();
             this.mapsFragment.mostrarCaminoManejando();
     }
 
@@ -372,16 +371,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.mapsFragment.ocultarPosicion();
     }
 
-//    public void handlePosition(android.view.View view)
-//    {
-//        this.mapsFragment.handlePosicion(boolean s);
-//    }
-
     public void cerrarColes(android.view.View view)
     {
-//        Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
-
         this.mapsFragment.cerrarColes();
+    }
+
+    public void clearMapa(android.view.View view)
+    {
+        this.mapsFragment.clearMapa();
     }
 
     //evento para actualizar los menus

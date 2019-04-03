@@ -27,7 +27,7 @@
                 android:textColor="@color/negro"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:text="Facultad "
+                android:text="Facultad: "
                 android:id="@+id/tv1" />
 
             <Spinner

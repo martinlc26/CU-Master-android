@@ -204,7 +204,6 @@ public class MenuFragment extends Fragment {
             }
             catch (JSONException e) {
                 e.printStackTrace();
-                //Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             }
             return null;
         }

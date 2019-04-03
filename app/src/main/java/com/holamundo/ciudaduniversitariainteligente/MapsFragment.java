@@ -135,6 +135,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     private Spinner spinner_colectivo = null;
     private ImageButton botonColectivo = null;
     private ImageButton botonCerrar = null;
+    private ImageButton botonClear = null;
 
     private ImageButton pos_off = null;
     private ImageButton pos_on = null;
@@ -184,6 +185,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         botonColectivo.setVisibility(View.VISIBLE);
         botonCerrar = (ImageButton) view.findViewById(R.id.botonCerrar);
         botonCerrar.setVisibility(View.GONE);
+
+        botonClear = (ImageButton) view.findViewById(R.id.botonClear);
+        botonClear.setVisibility(View.VISIBLE);
 
         pos_off = (ImageButton) view.findViewById(R.id.botonPosicionOff);
         pos_off.setVisibility(View.VISIBLE);
@@ -991,7 +995,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     {
         String url = armaUrl(true,this.lat,this.lon);
         Log.i("url: ",""+url);
-    //IMPLEMENTACION NUEVA
+        if(!bandera_pos) mostrarPosicion();
+
         DownloadTask downloadTask = new DownloadTask();
         downloadTask.execute(url);
     }
@@ -1000,7 +1005,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     {
         String url = armaUrl(false,this.lat,this.lon);
         Log.i("url: ",""+url);
-    //IMPLEMENTACION NUEVA
+        if(!bandera_pos) mostrarPosicion();
+
         DownloadTask downloadTask = new DownloadTask();
         downloadTask.execute(url);
 
@@ -1045,7 +1051,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         }
     }
 
-    //*******
 
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
 
@@ -1101,7 +1106,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         }
     }
 
-    //******
 
     public class DirectionsJSONParser {
 
@@ -1182,8 +1186,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         }
     }
 
-    //******
-
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -1222,10 +1224,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         return data;
     }
 
-
-    /////////////////////////////////////////////////////////**********************************
-
-
     //metodo para setear la key
     public void setKey(String key)
     {
@@ -1243,6 +1241,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     public void mostrarSpinnerColes() {
         spinner_colectivo.setVisibility(View.VISIBLE);
         botonColectivo.setVisibility(GONE);
+        botonClear.setVisibility(View.GONE);
         botonCerrar.setVisibility(View.VISIBLE);
     }
 
@@ -1250,6 +1249,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         spinner_colectivo.setSelection(0);
         spinner_colectivo.setVisibility(View.GONE);
         botonCerrar.setVisibility(View.GONE);
+        botonClear.setVisibility(View.VISIBLE);
         botonColectivo.setVisibility(View.VISIBLE);
         limpiarMapa();
     }
@@ -1262,20 +1262,21 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         miMapa.moveCamera(CameraUpdateFactory.zoomTo(18));
         miPosicion = new MarkerOptions().position(new LatLng(this.lat, this.lon)).title("Usted está aquí");
         miPosicionMarcador = miMapa.addMarker(miPosicion);
-        Toast.makeText(getActivity().getApplicationContext(), "Posición Activada", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "Posición Activada", Toast.LENGTH_SHORT).show();
         bandera_pos = true;
-
-        //handlePosicion(bandera_pos);
     }
 
     public void ocultarPosicion(){
         pos_off.setVisibility(View.GONE);
         pos_on.setVisibility(View.VISIBLE);
         miPosicionMarcador.remove();
-        Toast.makeText(getActivity().getApplicationContext(), "Posición desactivada", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "Posición desactivada", Toast.LENGTH_SHORT).show();
         bandera_pos = false;
+    }
 
-        //handlePosicion(bandera_pos);
+    public void clearMapa(){
+        Toast.makeText(getActivity().getApplicationContext(), "Mapa reiniciado.", Toast.LENGTH_LONG).show();
+        limpiarMapa();
     }
 
 
