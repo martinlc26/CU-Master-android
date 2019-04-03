@@ -175,7 +175,7 @@ public class BedeliaMovil extends ListFragment {
             if (result == "") {
                 Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getActivity().getApplicationContext(), facultad + "downloadtask", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity().getApplicationContext(), facultad, Toast.LENGTH_LONG).show();
                 ParserTask parser = new ParserTask();
                 parser.execute(result, facultad);
 
@@ -183,10 +183,16 @@ public class BedeliaMovil extends ListFragment {
         }
     }
 
-    private class ParserTask extends AsyncTask<String, Void, Void > {
+
+    private class ParserTask extends AsyncTask<String, Void, Integer > {
 
         @Override
-        protected Void doInBackground(String... strings) {
+        protected Integer doInBackground(String... strings) { //Void doInBackgroud
+            Integer bandera = 0;
+            //valores de bandera:
+            //0 = la opcion seleccionada es " -- "
+            //1 = el json tiene datos
+            //2 = el json no tiene datos (se selecciono una facu que no tiene horarios)
             String json = strings[0];
             String fac = strings[1];
             if (!fac.equals(" --- ")) {
@@ -215,31 +221,27 @@ public class BedeliaMovil extends ListFragment {
 
                         lista.add(mensaje);
                     }
-
+                bandera = 1;
                 } catch (JSONException e) {
-                    //listaClases.setAdapter(null);
                     e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado.", Toast.LENGTH_LONG).show();
+                    bandera = 2;
                 }
             }
-            return null;
+            return bandera;
         }
 
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(Integer result) { //Void result
             super.onPostExecute(result);
-            listaClases.setAdapter(null);
             //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
             ArrayAdapter<String> adapter = new ArrayAdapter<String>
                     (getActivity().getApplicationContext(),
                             R.layout.simple_list_item_1
                             , R.id.rowTextView,
                             lista);
-            //muestro
-            //ARREGLARRRRRRRRRRRRRRRR
-            if (listaClases !=null)
-            listaClases.setAdapter(adapter);
-            else {
+            if (result == 1) {//listaClases !=null
+                listaClases.setAdapter(adapter);
+            } else if (result == 2) {
                 listaClases.setAdapter(null);
                 Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado.", Toast.LENGTH_LONG).show();
             }
