@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "994809762355",
+    "firebase_url": "https://cu-unl.firebaseio.com",
+    "project_id": "cu-unl",
+    "storage_bucket": "cu-unl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994809762355:android:0e72edf246037d99",
+        "android_client_info": {
+          "package_name": "com.holamundo.ciudaduniversitariainteligente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994809762355-gk7qmss1bvqa4495la0blnhitb6suhqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.holamundo.ciudaduniversitariainteligente",
+            "certificate_hash": "edce6f85bc0cc249f0b3c987f3d0324a0ff24216"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3bR22pohX4GRSTX8xkM2lc4dJKph4_5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994809762355-ut92aabf3sijcqfthpd23gfk3prdt8fo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

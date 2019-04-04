@@ -557,7 +557,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             }
         });
 
-        miMapa.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-31.640578, -60.672906)));
+        //miMapa.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-31.640578, -60.672906)));
 
         //Hago mi propia InfoWindow, para poder mostrar una imagen del nodo cuando hago click en el y ver el lugar que está señalado
         miMapa.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -581,14 +581,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                 return v;
             }
         });
-
+        miMapa.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-31.640578, -60.672906)));
         mostrarPosicion();
-        //Muevo la camara hasta mi posicion y agrego un marcador allí
-/*        LatLng position = new LatLng(this.lat, this.lon);
-        miMapa.moveCamera(CameraUpdateFactory.newLatLng(position));
-        miMapa.moveCamera(CameraUpdateFactory.zoomTo(18));
-        miPosicion = new MarkerOptions().position(new LatLng(this.lat, this.lon)).title("Usted está aquí");
-        miPosicionMarcador = miMapa.addMarker(miPosicion);*/
 
         //Agrego los marcadores adicionales (Edificios, baños, bares,etc), si los hay
         for (int i = 0; i < misMarcadores.size(); i++) {
