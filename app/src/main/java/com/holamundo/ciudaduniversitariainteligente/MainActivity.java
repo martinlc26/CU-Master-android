@@ -332,17 +332,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para trazar la ruta si se va caminando
     public void mostrarCaminoCaminando(android.view.View view)
     {
-  //      Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
-//        boolean bandera = hayConexion();
-//        if (bandera)
             this.mapsFragment.mostrarCaminoCaminando();
-       // else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
     }
 
     //evento para trazar la ruta si se va manejando
     public void mostrarCaminoManejando(android.view.View view)
     {
-            //this.mapsFragment.mostrarPosicion();
             this.mapsFragment.mostrarCaminoManejando();
     }
 
@@ -378,24 +373,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void clearMapa(android.view.View view)
     {
+        menu.clear();
         this.mapsFragment.clearMapa();
     }
 
     //evento para actualizar los menus
     public void mostrarMenuComedor(android.view.View view)
     {
-//        boolean bandera = hayConexion();
-//        if (bandera){
-//            Button boton = (Button)view;
-//            String botonTexto = boton.getText().toString();
-//            //Toast.makeText(this,botonTexto, Toast.LENGTH_LONG).show();
-//            this.menuFragment.mostrarMenues(botonTexto);
-//        }
-//
-//        else  Toast.makeText(this,"Sin conexión...", Toast.LENGTH_LONG).show();
             Button boton = (Button)view;
             String botonTexto = boton.getText().toString();
-            //Toast.makeText(this,botonTexto, Toast.LENGTH_LONG).show();
             this.menuFragment.mostrarMenues(botonTexto);
 
     }
@@ -404,16 +390,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void recargarMenuComedor(android.view.View view)
     {
         this.menuFragment.recargarMenu();
-    }
-
-    public boolean hayConexion() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean bandera = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-
-        return bandera;
     }
 
 }

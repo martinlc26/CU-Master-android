@@ -478,7 +478,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                 new LatLng(-31.676919,	-60.692609)
         );
 
-
         //OnItemSelectedListener para el spinner_colectivo, depende que
         // selecciono, habilito o deshabilito los otros spinners
         spinner_colectivo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -675,7 +674,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         miPosicionMarcador.remove();
         misPolilineas.clear();
         marcadoresPiso.clear();
-        //misOverlays.clear();
+        misOverlays.clear();
         miMapa.clear();
         if (bandera_pos) miPosicionMarcador = miMapa.addMarker(miPosicion);
         setPisoActual(0);
@@ -949,40 +948,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
         //armo la url
         return  "https://maps.googleapis.com/maps/api/directions/json?origin="+latitud+","+longitud+"&destination=-31.640771, -60.671849"+ key + modo;
-        //return "https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
-    }
-
-    private void mostrarDistanciaTiempo(JSONObject jso)
-    {
-        try
-        {
-            //obtengo routes
-            JSONArray jRoutes = jso.getJSONArray("routes");
-
-            JSONObject routes = jRoutes.getJSONObject(0);
-
-            JSONArray legs = routes.getJSONArray("legs");
-
-            JSONObject steps = legs.getJSONObject(0);
-
-            JSONObject distance = steps.getJSONObject("distance");
-
-            JSONObject tiempo = steps.getJSONObject("duration");
-
-            String aux =  tiempo.get("text").toString();
-
-            //conversion de hours a hora y mins a min
-            String h = aux.replace("hour","hora");
-            String m = h.replace("mins","min.");
-
-            //armo el menssje
-            String mensaje = "La distancia es " + distance.get("text") + "\n" + "Tiempo estimado :" + m ;
-            //debug
-            Toast.makeText(getActivity().getApplicationContext(),mensaje, Toast.LENGTH_LONG).show();
-        }
-        catch(JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     public void mostrarCaminoCaminando()
@@ -1040,7 +1005,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                 Toast.makeText(getActivity().getApplicationContext(), "Error de conexión", Toast.LENGTH_LONG).show();
             } else {
             ParserTask parserTask = new ParserTask();
-            Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity().getApplicationContext(),result, Toast.LENGTH_LONG).show();
             parserTask.execute(result); }
         }
     }
@@ -1057,10 +1022,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             try{
                 jObject = new JSONObject(jsonData[0]);
                 DirectionsJSONParser parser = new DirectionsJSONParser();
-                ////
-                mostrarDistanciaTiempo(jObject); ////
-                ////
-
                 routes = parser.parse(jObject);
             }catch(Exception e){
                 e.printStackTrace();
@@ -1072,7 +1033,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
-            MarkerOptions markerOptions = new MarkerOptions();
+            //MarkerOptions markerOptions = new MarkerOptions();
 
             for(int i=0;i<result.size();i++){
                 points = new ArrayList<LatLng>();
@@ -1091,7 +1052,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
                 }
 
                 lineOptions.addAll(points);
-                lineOptions.width(4);
+                lineOptions.width(5);
                 lineOptions.color(Color.rgb(0,0,255));
             }
             if(lineOptions!=null) {
@@ -1103,7 +1064,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
     public class DirectionsJSONParser {
 
-        public List<List<HashMap<String,String>>> parse(JSONObject jObject){
+        public List<List<HashMap<String,String>>> parse(JSONObject jObject) {
 
             List<List<HashMap<String, String>>> routes = new ArrayList<List<HashMap<String,String>>>() ;
             JSONArray jRoutes = null;
@@ -1178,6 +1139,38 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
             return poly;
         }
+
+/*        private void mostrarDistanciaTiempo(JSONObject jso)
+        {
+            try
+            {
+                JSONArray jRoutes = jso.getJSONArray("routes");
+
+                JSONObject routes = jRoutes.getJSONObject(0);
+
+                JSONArray legs = routes.getJSONArray("legs");
+
+                JSONObject steps = legs.getJSONObject(0);
+
+                JSONObject distance = steps.getJSONObject("distance");
+
+                JSONObject tiempo = steps.getJSONObject("duration");
+
+                String aux =  tiempo.get("text").toString();
+
+                //conversion de hours a hora y mins a min
+                String h = aux.replace("hour","hora");
+                String m = h.replace("mins","min");
+
+                //armo el menssje
+                String mensaje = "La distancia es " + distance.get("text") + "\n" + "Tiempo estimado :" + m ;
+                //debug
+                //Toast.makeText(getActivity().getApplicationContext(),mensaje, Toast.LENGTH_LONG).show();
+            }
+            catch(JSONException e) {
+                e.printStackTrace();
+            }
+        }*/
     }
 
     private String downloadUrl(String strUrl) throws IOException {
@@ -1269,7 +1262,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     }
 
     public void clearMapa(){
-        Toast.makeText(getActivity().getApplicationContext(), "Mapa reiniciado.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Mapa reiniciado", Toast.LENGTH_LONG).show();
         limpiarMapa();
     }
 
