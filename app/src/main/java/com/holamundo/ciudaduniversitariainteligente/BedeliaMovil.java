@@ -240,7 +240,7 @@ public class BedeliaMovil extends ListFragment {
                 listaClases.setAdapter(adapter);
             } else if (result == 2) {
                 listaClases.setAdapter(null);
-                Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "No se encontraron horarios de cursado", Toast.LENGTH_LONG).show();
             }
         }
     }
